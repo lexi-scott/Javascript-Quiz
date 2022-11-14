@@ -2,12 +2,6 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-/* body {
-    height: auto;
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 16%, rgba(253,187,45,1) 75%);
-} */
-
 header {
     display: flex;
     flex-wrap: wrap;
