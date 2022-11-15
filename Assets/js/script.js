@@ -1,11 +1,28 @@
 var titleDiv = document.getElementById("title");
 var alts = document.querySelectorAll(".alternative");
-// var btn = document.querySelectorAll("button");
 var resultDiv = document.querySelector(".result");
 var timeEl = document.querySelector(".time")
 var quizEl = document.querySelector(".quiz");
+var startEl = document.querySelector(".start");
+var beginEl = document.querySelector(".beginBtn")
+
 var score = 0;
 var secondsLeft = 120;
+
+function startGame() {
+  startEl.textContent = "Are you ready to test you knowledge on JavaScript?";
+  var startButton = document.createElement("BUTTON");
+  var startBText = document.createTextNode("Begin Quiz!");
+  startButton.appendChild(startBText);
+  startEl.appendChild(startButton);
+  startButton.addEventListener("click", function(event){
+    setTime();
+    showQuestion();
+  startEl.style.display = "none";
+  beginEl.style.display = "none";
+  });
+  };
+
 
 //time counter function
 function setTime() {
@@ -17,12 +34,12 @@ function setTime() {
       if(secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
-        // if timer is to zero, need to show "Game Over"
+        // if timer is to zero, need to show "Game Over" call gameOver function
       }
   
     }, 1000);
   }
-setTime();
+
 
 //define the object for the questions
 var questions = [
@@ -68,21 +85,21 @@ function showQuestion() {
    element.addEventListener('click', function(event) {
     if (questions[currentQuestion].correctAnswer == index) {
         resultDiv.textContent = 'Correct Answer';
-        //keeps score
-        score++
-        console.log(score);
         //add next question button
         var nextButton = document.createElement("BUTTON");
         var text = document.createTextNode("Next Question");
         nextButton.appendChild(text);
         resultDiv.appendChild(nextButton);
-
-        element.addEventListener('click', function(event){
-          console.log("does this work??")
+      //click event to call next question function
+        nextButton.addEventListener('click', function(event){
+          resultDiv.textContent = " ";
+          if(currentQuestion <= questions.length ){
+            nextQuestion();
+          }
         }
-        );
-        
+        );  
     }
+    //wrong answer will appear if wrong answer is chosen 
     else {
         resultDiv.textContent = 'Wrong Answer';
         secondsLeft--;
@@ -90,26 +107,20 @@ function showQuestion() {
  });
 } 
 
-// function nextQuestion() {
-//   console.log("In nextQuestion Function");
-//   // we need to update or clear the previous question
-
-//   // we want to show the next question --> showQuestion();
-
-//   // increment our index / current question / ITERATOR
-//   currentQuestion++;
-//   console.log(currentQuestion);
-//   showQuestion();
-// }
-
-// function moreQuestions() {
-//   if(currentQuestion > questions.length) {
-//     gameOver();
-//   }
-// }
+function nextQuestion() {
+  // increment our index / current question / ITERATOR
+  score++;
+  console.log(score);
+  currentQuestion++;
+  if (currentQuestion <= questions.length) {
+    showQuestion();
+  }
+  // else (currentQuestion > questions.length)
+  // gameOver();
+}
 
 //calls the function
-showQuestion();
+startGame();
 
 // potential function to have the if loops to check answer...not necessray 
 // function checkAnswer(answer) {
