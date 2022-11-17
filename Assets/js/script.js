@@ -7,12 +7,15 @@ var startEl = document.querySelector(".start");
 var beginEl = document.querySelector(".beginBtn")
 
 var score = 0;
-var secondsLeft = 120;
+var secondsLeft = 2;
 
 function startGame() {
-  startEl.textContent = "Are you ready to test you knowledge on JavaScript?";
+  var startTitle = document.createElement("h1");
+  startEl.appendChild(startTitle);
+  startTitle.textContent= "Are you ready to test you knowledge on JavaScript?";
   var startButton = document.createElement("BUTTON");
   var startBText = document.createTextNode("Begin Quiz!");
+  startEl.style.setProperty("color", "purple");
   startButton.appendChild(startBText);
   startEl.appendChild(startButton);
   startButton.addEventListener("click", function(event){
@@ -36,6 +39,7 @@ function setTime() {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // if timer is to zero, need to show "Game Over" call gameOver function
+        gameOver();
       }
   
     }, 1000);
@@ -66,7 +70,7 @@ var questions = [
   {
     title: "What would be the result of 3+2+'7'",
     alternatives: ["9", "327", "57", "NaN"],
-   correctAnswer: 2
+    correctAnswer: 2
   } 
 ];
 
@@ -83,7 +87,7 @@ function showQuestion() {
     element.textContent = questions[currentQuestion].alternatives[index];
 
    element.addEventListener('click', function(event) {
-    if (questions[currentQuestion].correctAnswer == index) {
+    if (questions[currentQuestion].correctAnswer === index) {
         resultDiv.textContent = 'Correct Answer';
         //add next question button
         var nextButton = document.createElement("BUTTON");
@@ -115,25 +119,18 @@ function nextQuestion() {
   if (currentQuestion <= questions.length) {
     showQuestion();
   }
-  else {
-  gameOver();
 }
+
+function gameOver() {
+  beginEl.style.display = "none";
+  quizEl.style.display = "none";
+  var overTitle = document.createElement("h1");
+  startEl.appendChild(overTitle);
+  overTitle.textContent = "Game Over"
+  console.log("game over")
 }
+
+// gameOver();
 
 //calls the function
 startGame();
-
-function gameOver() {
-  console.log("game over")
-}
-// potential function to have the if loops to check answer...not necessray 
-// function checkAnswer(answer) {
-  // var userSelect = event.target.value;
-  //   checkAnswer(userSelect);
-//   // nextQuestion();
-// }
-
-
-
-// gameOver() 
-// We show the user their ending score and inital input form
