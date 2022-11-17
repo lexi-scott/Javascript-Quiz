@@ -18,6 +18,7 @@ function startGame() {
   startButton.addEventListener("click", function(event){
     setTime();
     showQuestion();
+    quizEl.classList.remove("hidden");
   startEl.style.display = "none";
   beginEl.style.display = "none";
   });
@@ -39,7 +40,6 @@ function setTime() {
   
     }, 1000);
   }
-
 
 //define the object for the questions
 var questions = [
@@ -70,7 +70,7 @@ var questions = [
   } 
 ];
 
-var currentQuestion = 0;  // we initalize a value for our ITERATOR
+var currentQuestion = 0;  
 
 //function for showing the question
 function showQuestion() {
@@ -115,13 +115,17 @@ function nextQuestion() {
   if (currentQuestion <= questions.length) {
     showQuestion();
   }
-  // else (currentQuestion > questions.length)
-  // gameOver();
+  else {
+  gameOver();
+}
 }
 
 //calls the function
 startGame();
 
+function gameOver() {
+  console.log("game over")
+}
 // potential function to have the if loops to check answer...not necessray 
 // function checkAnswer(answer) {
   // var userSelect = event.target.value;

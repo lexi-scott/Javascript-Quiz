@@ -30,6 +30,10 @@ header {
     flex-flow: column;
 }
 
+.hidden {
+    display: none;
+}
+
 #title {
     padding-top: 10px;
     align-self: center;
