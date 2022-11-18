@@ -4,26 +4,25 @@ var resultDiv = document.querySelector(".result");
 var timeEl = document.querySelector(".time")
 var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
-var beginEl = document.querySelector(".beginBtn")
 
 var score = 0;
-var secondsLeft = 2;
+var secondsLeft =3;
 
 function startGame() {
   var startTitle = document.createElement("h1");
   startEl.appendChild(startTitle);
-  startTitle.textContent= "Are you ready to test you knowledge on JavaScript?";
-  var startButton = document.createElement("BUTTON");
-  var startBText = document.createTextNode("Begin Quiz!");
+  startTitle.textContent= "Are you ready to test your knowledge on JavaScript?";
   startEl.style.setProperty("color", "purple");
-  startButton.appendChild(startBText);
+  startEl.style.setProperty("text-align", "center");
+  var startButton = document.createElement("BUTTON");
   startEl.appendChild(startButton);
+  startButton.textContent = 'Begin Quiz!'
   startButton.addEventListener("click", function(event){
     setTime();
     showQuestion();
     quizEl.classList.remove("hidden");
-  startEl.style.display = "none";
-  beginEl.style.display = "none";
+  startTitle.style.display = "none";
+  startButton.style.display = "none";
   });
   };
 
@@ -91,12 +90,10 @@ function showQuestion() {
         resultDiv.textContent = 'Correct Answer';
         //add next question button
         var nextButton = document.createElement("BUTTON");
-        var text = document.createTextNode("Next Question");
-        nextButton.appendChild(text);
+        nextButton.textContent = 'Next Question';
         resultDiv.appendChild(nextButton);
       //click event to call next question function
         nextButton.addEventListener('click', function(event){
-          resultDiv.textContent = " ";
           if(currentQuestion <= questions.length ){
             nextQuestion();
           }
@@ -119,18 +116,24 @@ function nextQuestion() {
   if (currentQuestion <= questions.length) {
     showQuestion();
   }
+  else {
+    gameOver();
+  }
 }
 
 function gameOver() {
-  beginEl.style.display = "none";
-  quizEl.style.display = "none";
   var overTitle = document.createElement("h1");
   startEl.appendChild(overTitle);
-  overTitle.textContent = "Game Over"
+  overTitle.textContent = "Game Over";
+  var showScore = document.createElement("h3");
+  showScore.textContent = "Your score: " + score; 
+  startEl.appendChild(showScore);
+  var userName = document.createElement("input");
+  startEl.appendChild(userName);
+
+  quizEl.style.display = "none";
   console.log("game over")
 }
-
-// gameOver();
 
 //calls the function
 startGame();
