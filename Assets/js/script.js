@@ -6,7 +6,7 @@ var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
 
 var score = 0;
-var secondsLeft =3;
+var secondsLeft = 30;
 
 function startGame() {
   var startTitle = document.createElement("h1");
@@ -34,12 +34,12 @@ function setTime() {
       secondsLeft--;
       timeEl.textContent = "Time left: " + secondsLeft;
   
-      if(secondsLeft === 0) {
-        // Stops execution of action at set interval
+      // if(secondsLeft === 0) {
+      //   // Stops execution of action at set interval
         clearInterval(timerInterval);
-        // if timer is to zero, need to show "Game Over" call gameOver function
-        gameOver();
-      }
+      //   // if timer is to zero, need to show "Game Over" call gameOver function
+      //   gameOver();
+      // }
   
     }, 1000);
   }
@@ -113,8 +113,11 @@ function nextQuestion() {
   score++;
   console.log(score);
   currentQuestion++;
-  if (currentQuestion <= questions.length) {
+  if (currentQuestion < questions.length) {
     showQuestion();
+  }
+  else if (secondsLeft = 0) {
+    gameOver();
   }
   else {
     gameOver();
@@ -129,7 +132,11 @@ function gameOver() {
   showScore.textContent = "Your score: " + score; 
   startEl.appendChild(showScore);
   var userName = document.createElement("input");
+  userName.placeholder = "Type Initials here";
   startEl.appendChild(userName);
+  var submitInitials = document.createElement('button');
+  submitInitials.textContent = "Submit";
+  startEl.appendChild(submitInitials);
 
   quizEl.style.display = "none";
   console.log("game over")

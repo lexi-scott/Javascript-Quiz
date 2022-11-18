@@ -9,35 +9,8 @@ header {
     padding-bottom: 60px;
 }
 
-.highScores {
-    padding-left: 15px;
-    font-size: 18px;
-    color: purple;
-}
-
-.time {
-    padding-right: 15px;
-    font-size: 18px;
-    color: purple;
-}
-
-.quiz {
-    margin: 50px 200px auto 200px;
-    border: 2px dashed purple;
-    height: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-flow: column;
-}
-
-.hidden {
-    display: none;
-}
-
-#title {
-    padding-top: 10px;
-    align-self: center;
-    font-size: 25px;
+body {
+    background-color: lightslategray;
 }
 
 ul {
@@ -68,9 +41,49 @@ li:hover {
 
 }
 
+button {
+    border-radius: 2px; 
+    background-color: purple;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+.highScores {
+    padding-left: 15px;
+    font-size: 18px;
+    color: purple;
+}
+
+.time {
+    padding-right: 15px;
+    font-size: 18px;
+    color: purple;
+}
+
+.quiz {
+    margin: 50px 200px auto 200px;
+    border: 2px dashed purple;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
+    background-color: white;
+}
+
+.hidden {
+    display: none;
+}
+
 .result {
     align-self: baseline;
     width: 100%;
     font-size: 20px;
     color: gray;
+}
+
+#title {
+    padding-top: 10px;
+    align-self: center;
+    font-size: 25px;
 }
