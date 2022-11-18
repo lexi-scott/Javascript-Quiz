@@ -6,7 +6,8 @@ var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
 
 var score = 0;
-var secondsLeft = 30;
+var secondsLeft = 15;
+var timerPause = false;
 
 function startGame() {
   var startTitle = document.createElement("h1");
@@ -31,15 +32,16 @@ function startGame() {
 function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
+      if(!timerPause){
       secondsLeft--;
       timeEl.textContent = "Time left: " + secondsLeft;
-  
-      // if(secondsLeft === 0) {
-      //   // Stops execution of action at set interval
+      }
+      if(secondsLeft === 0) {
+      // Stops execution of action at set interval
         clearInterval(timerInterval);
-      //   // if timer is to zero, need to show "Game Over" call gameOver function
-      //   gameOver();
-      // }
+        // if timer is to zero, need to show "Game Over" call gameOver function
+        gameOver();
+      }
   
     }, 1000);
   }
@@ -115,11 +117,10 @@ function nextQuestion() {
   currentQuestion++;
   if (currentQuestion < questions.length) {
     showQuestion();
-  }
-  else if (secondsLeft = 0) {
-    gameOver();
+    resultDiv.textContent = "";
   }
   else {
+    timerPause = true;
     gameOver();
   }
 }
