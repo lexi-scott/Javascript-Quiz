@@ -6,7 +6,8 @@ var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
 
 var score = 0;
-var secondsLeft =3;
+var secondsLeft = 15;
+var timerPause = false;
 
 function startGame() {
   var startTitle = document.createElement("h1");
@@ -31,11 +32,12 @@ function startGame() {
 function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
+      if(!timerPause){
       secondsLeft--;
       timeEl.textContent = "Time left: " + secondsLeft;
-  
+      }
       if(secondsLeft === 0) {
-        // Stops execution of action at set interval
+      // Stops execution of action at set interval
         clearInterval(timerInterval);
         // if timer is to zero, need to show "Game Over" call gameOver function
         gameOver();
@@ -113,10 +115,12 @@ function nextQuestion() {
   score++;
   console.log(score);
   currentQuestion++;
-  if (currentQuestion <= questions.length) {
+  if (currentQuestion < questions.length) {
     showQuestion();
+    resultDiv.textContent = "";
   }
   else {
+    timerPause = true;
     gameOver();
   }
 }
@@ -129,7 +133,11 @@ function gameOver() {
   showScore.textContent = "Your score: " + score; 
   startEl.appendChild(showScore);
   var userName = document.createElement("input");
+  userName.placeholder = "Type Initials here";
   startEl.appendChild(userName);
+  var submitInitials = document.createElement('button');
+  submitInitials.textContent = "Submit";
+  startEl.appendChild(submitInitials);
 
   quizEl.style.display = "none";
   console.log("game over")
