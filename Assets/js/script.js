@@ -6,8 +6,9 @@ var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
 
 var score = 0;
-var secondsLeft = 15;
+var secondsLeft = 5;
 var timerPause = false;
+storedUserName = " ";
 
 function startGame() {
   var startTitle = document.createElement("h1");
@@ -134,14 +135,41 @@ function gameOver() {
   startEl.appendChild(showScore);
   var userName = document.createElement("input");
   userName.placeholder = "Type Initials here";
+  userName.textContent = storedUserName;
   startEl.appendChild(userName);
   var submitInitials = document.createElement('button');
   submitInitials.textContent = "Submit";
   startEl.appendChild(submitInitials);
 
+  submitInitials.addEventListener("click", function(event) {
+      submitScore();
+      console.log(storedUserName);
+      //need this to work
+      submitInitials.style.display = "none";
+
+  }
+  );
   quizEl.style.display = "none";
   console.log("game over")
 }
 
+function submitScore() {
+  // var storedUserName = JSON.parse(localStorage.getItem(userName.value));
+  var scoreBoard = document.createElement("ul");
+  startEl.appendChild(scoreBoard);
+  var scoreBName = document.createElement("li");
+  scoreBoard.appendChild(scoreBName);
+  scoreBName.textContent = storedUserName;
+  console.log(storedUserName);
+  userName.style.setProperty("color", "white");
+  quizEl.style.display = "none";
+}
+
 //calls the function
 startGame();
+
+
+//need to hide submit button after click
+//need to print name on li
+//need to store name in local storage
+//then i'm done!
