@@ -8,8 +8,9 @@ var startEl = document.querySelector(".start");
 var score = 0;
 var secondsLeft = 5;
 var timerPause = false;
-storedUserName = " ";
+var storedUserName = " ";
 
+//start game function to start timer and show quiz questions
 function startGame() {
   var startTitle = document.createElement("h1");
   startEl.appendChild(startTitle);
@@ -107,12 +108,15 @@ function showQuestion() {
     else {
         resultDiv.textContent = 'Wrong Answer';
         secondsLeft--;
+        if (secondsLeft === 0){
+          gameOver();
+        }
    }});
  });
 } 
 
+//function to display next question, add to score and end game if timer is over
 function nextQuestion() {
-  // increment our index / current question / ITERATOR
   score++;
   console.log(score);
   currentQuestion++;
@@ -135,32 +139,33 @@ function gameOver() {
   startEl.appendChild(showScore);
   var userName = document.createElement("input");
   userName.placeholder = "Type Initials here";
-  userName.textContent = storedUserName;
   startEl.appendChild(userName);
   var submitInitials = document.createElement('button');
   submitInitials.textContent = "Submit";
   startEl.appendChild(submitInitials);
 
   submitInitials.addEventListener("click", function(event) {
+    //collects userName initials value
+    storedUserName = event.target.previousElementSibling.value;
+    console.log(storedUserName);
       submitScore();
-      console.log(storedUserName);
-      //need this to work
-      submitInitials.style.display = "none";
-
   }
   );
   quizEl.style.display = "none";
   console.log("game over")
 }
 
+//function to display scores on screen and store to localstorage
 function submitScore() {
-  // var storedUserName = JSON.parse(localStorage.getItem(userName.value));
+  var submitInitials = document.querySelector('button');
+  submitInitials.style.display = "none";
   var scoreBoard = document.createElement("ul");
   startEl.appendChild(scoreBoard);
   var scoreBName = document.createElement("li");
   scoreBoard.appendChild(scoreBName);
-  scoreBName.textContent = storedUserName;
-  console.log(storedUserName);
+  var storedData = scoreBName.textContent = (storedUserName + " " + score + " points");
+  localStorage.setItem("storedScores", storedData);
+  console.log(typeof storedData);
   userName.style.setProperty("color", "white");
   quizEl.style.display = "none";
 }
@@ -173,3 +178,20 @@ startGame();
 //need to print name on li
 //need to store name in local storage
 //then i'm done!
+
+// let testString = "Bingo";
+// let dataArray = [1, 2, 3, 4, 5];  // typeof data here is a JAVASCRIPT ARRAY
+// console.log(typeof dataArray)
+// // if we have to change our data type (JSON.stringifY() - JSON.parse())
+// localStorage.setItem("numbers", JSON.stringify(dataArray))  // can only accept STRING data
+
+// // UPDATE data in localstorage
+// let storedData = localStorage.getItem("number");
+// console.log(storedData);
+// console.log(typeof storedData);
+// let storedJSdata = JSON.parse(storedData);
+// console.log(storedJSdata);
+// console.log(typeof storedJSdata);
+
+// storedJSdata.push(10);
+// localStorage.setItem("numbers", JSON.stringify(storedJSdata) )
