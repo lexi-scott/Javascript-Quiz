@@ -28,5 +28,6 @@ THEN I can save my initials and my score
 ![image](https://user-images.githubusercontent.com/111103755/203248998-4bb0943f-3712-4b88-80dd-75e4c2302590.png)
 
 ## Deployed page
+https://lexi-scott.github.io/Javascript-Quiz/ 
 
 
