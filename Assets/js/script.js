@@ -6,9 +6,9 @@ var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
 
 var score = 0;
-var secondsLeft = 5;
+var secondsLeft = 3;
 var timerPause = false;
-var storedUserName = " ";
+var storedUserName = [];
 
 //start game function to start timer and show quiz questions
 function startGame() {
@@ -147,51 +147,26 @@ function gameOver() {
   submitInitials.addEventListener("click", function(event) {
     //collects userName initials value
     storedUserName = event.target.previousElementSibling.value;
+    function removeHandler() {
+      submitInitials.removeEventListener("clicked", event);
+    }
     console.log(storedUserName);
       submitScore();
-  }
-  );
+      removeHandler();
+    });
   quizEl.style.display = "none";
-  console.log("game over")
+  console.log("game over");
 }
 
 //function to display scores on screen and store to localstorage
 function submitScore() {
-  var submitInitials = document.querySelector('button');
-  submitInitials.style.display = "none";
-  var scoreBoard = document.createElement("ul");
+  var scoreBoard = document.createElement("div");
   startEl.appendChild(scoreBoard);
-  var scoreBName = document.createElement("li");
-  scoreBoard.appendChild(scoreBName);
-  var storedData = scoreBName.textContent = (storedUserName + " " + score + " points");
+  var storedData = scoreBoard.textContent = (storedUserName + " " + score + " points");
   localStorage.setItem("storedScores", storedData);
   console.log(typeof storedData);
-  userName.style.setProperty("color", "white");
   quizEl.style.display = "none";
 }
 
 //calls the function
 startGame();
-
-
-//need to hide submit button after click
-//need to print name on li
-//need to store name in local storage
-//then i'm done!
-
-// let testString = "Bingo";
-// let dataArray = [1, 2, 3, 4, 5];  // typeof data here is a JAVASCRIPT ARRAY
-// console.log(typeof dataArray)
-// // if we have to change our data type (JSON.stringifY() - JSON.parse())
-// localStorage.setItem("numbers", JSON.stringify(dataArray))  // can only accept STRING data
-
-// // UPDATE data in localstorage
-// let storedData = localStorage.getItem("number");
-// console.log(storedData);
-// console.log(typeof storedData);
-// let storedJSdata = JSON.parse(storedData);
-// console.log(storedJSdata);
-// console.log(typeof storedJSdata);
-
-// storedJSdata.push(10);
-// localStorage.setItem("numbers", JSON.stringify(storedJSdata) )
