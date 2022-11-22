@@ -6,7 +6,7 @@ var quizEl = document.querySelector(".quiz");
 var startEl = document.querySelector(".start");
 
 var score = 0;
-var secondsLeft = 3;
+var secondsLeft = 45;
 var timerPause = false;
 var storedUserName = [];
 
